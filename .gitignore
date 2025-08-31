@@ -1,8 +1,7 @@
-./build/*
-.cahce
+build/
 
-# Created by https://www.toptal.com/developers/gitignore/api/c,c++,clion,codecomposerstudio,cmake,doxygen,eclipse,emacs,git,iar,keil,latex,linux,macos,mercurial,objective-c,obsidian,qt,stdlib,test,vim,visualstudio,visualstudiocode,vivado,windows,xilinx,xmake
-# Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,clion,codecomposerstudio,cmake,doxygen,eclipse,emacs,git,iar,keil,latex,linux,macos,mercurial,objective-c,obsidian,qt,stdlib,test,vim,visualstudio,visualstudiocode,vivado,windows,xilinx,xmake
+# Created by https://www.toptal.com/developers/gitignore/api/c,c++,windows,macos,linux,visualstudio,visualstudiocode,codecomposerstudio,eclipse,vim,emacs,cmake,clion,xmake
+# Edit at https://www.toptal.com/developers/gitignore?templates=c,c++,windows,macos,linux,visualstudio,visualstudiocode,codecomposerstudio,eclipse,vim,emacs,cmake,clion,xmake
 
 ### C ###
 # Prerequisites
@@ -233,10 +232,6 @@ makefile
 # Uniflash session files
 *.uniflashsession
 
-### Doxygen ###
-html
-latex
-
 ### Eclipse ###
 .metadata
 bin/
@@ -351,414 +346,6 @@ flycheck_*.el
 /network-security.data
 
 
-### Git ###
-# Created by git for backups. To disable backups in Git:
-# $ git config --global mergetool.keepBackup false
-*.orig
-
-# Created by git when using merge tools for conflicts
-*.BACKUP.*
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-*_BACKUP_*.txt
-*_BASE_*.txt
-*_LOCAL_*.txt
-*_REMOTE_*.txt
-
-### IAR ###
-# Compiled binaries
-*.bin
-
-# Trash
-thumbs.db
-*.~*
-
-# IAR Settings
-**/settings/*.crun
-**/settings/*.dbgdt
-**/settings/*.cspy
-**/settings/*.cspy.*
-**/settings/*.xcl
-**/settings/*.dni
-**/settings/*.wsdt
-**/settings/*.wspos
-
-# IAR Debug Exe
-**/Exe/*.sim
-
-# IAR Debug Obj
-**/Obj/*.pbd
-**/Obj/*.pbd.*
-**/Obj/*.pbi
-**/Obj/*.pbi.*
-
-# IAR project "Debug" directory
-
-# IAR project "Release" directory
-
-# IAR project settings directory
-settings/
-
-# IAR backup files
-Backup*
-
-# IAR .dep files
-*.dep
-
-### Keil ###
-# something maybe need to add
-# *.bat  # generate batch file
-# output/project_name # uv project generate without file ext
-# *.SRC # generate source file
-# *.src
-
-# Prerequisites
-# Object files
-*.OBJ
-
-# Listing Files
-*.COD
-*.cod
-*.[Ii]
-*.LST
-*.lst
-*.MAP
-*.[Mm]51
-*.[Mm]66
-*.SCR
-*.scr
-
-# LINK output
-*.ABS
-
-# Libraries
-*.LIB
-
-
-# uv output
-*.lnp
-*.build_log.htm
-*.HEX
-
-
-# Build Files
-*._IA
-*.__[Ii]
-*._[Ii][Ii]
-
-# project
-*.uvgui.*
-*.uvguix.*
-
-
-### LaTeX ###
-## Core latex/pdflatex auxiliary files:
-*.aux
-*.lof
-*.log
-*.lot
-*.fls
-*.toc
-*.fmt
-*.fot
-*.cb
-*.cb2
-.*.lb
-
-## Intermediate documents:
-*.dvi
-*.xdv
-*-converted-to.*
-# these rules might exclude image files for figures etc.
-# *.ps
-# *.eps
-# *.pdf
-
-## Generated if empty string is given at "Please type another file name for output:"
-.pdf
-
-## Bibliography auxiliary files (bibtex/biblatex/biber):
-*.bbl
-*.bcf
-*.blg
-*-blx.aux
-*-blx.bib
-*.run.xml
-
-## Build tool auxiliary files:
-*.fdb_latexmk
-*.synctex
-*.synctex(busy)
-*.synctex.gz
-*.synctex.gz(busy)
-*.pdfsync
-
-## Build tool directories for auxiliary files
-# latexrun
-latex.out/
-
-## Auxiliary and intermediate files from other packages:
-# algorithms
-*.alg
-*.loa
-
-# achemso
-acs-*.bib
-
-# amsthm
-*.thm
-
-# beamer
-*.nav
-*.pre
-*.snm
-*.vrb
-
-# changes
-*.soc
-
-# comment
-*.cut
-
-# cprotect
-*.cpt
-
-# elsarticle (documentclass of Elsevier journals)
-*.spl
-
-# endnotes
-*.ent
-
-# fixme
-*.lox
-
-# feynmf/feynmp
-*.mf
-*.mp
-*.t[1-9]
-*.t[1-9][0-9]
-*.tfm
-
-#(r)(e)ledmac/(r)(e)ledpar
-*.end
-*.?end
-*.[1-9]
-*.[1-9][0-9]
-*.[1-9][0-9][0-9]
-*.[1-9]R
-*.[1-9][0-9]R
-*.[1-9][0-9][0-9]R
-*.eledsec[1-9]
-*.eledsec[1-9]R
-*.eledsec[1-9][0-9]
-*.eledsec[1-9][0-9]R
-*.eledsec[1-9][0-9][0-9]
-*.eledsec[1-9][0-9][0-9]R
-
-# glossaries
-*.acn
-*.acr
-*.glg
-*.glo
-*.gls
-*.glsdefs
-*.lzo
-*.lzs
-*.slg
-*.sls
-
-# uncomment this for glossaries-extra (will ignore makeindex's style files!)
-# *.ist
-
-# gnuplot
-*.gnuplot
-*.table
-
-# gnuplottex
-*-gnuplottex-*
-
-# gregoriotex
-*.gaux
-*.glog
-*.gtex
-
-# htlatex
-*.4ct
-*.4tc
-*.idv
-*.lg
-*.trc
-*.xref
-
-# hyperref
-*.brf
-
-# knitr
-*-concordance.tex
-# TODO Uncomment the next line if you use knitr and want to ignore its generated tikz files
-# *.tikz
-*-tikzDictionary
-
-# listings
-*.lol
-
-# luatexja-ruby
-*.ltjruby
-
-# makeidx
-*.idx
-*.ilg
-*.ind
-
-# minitoc
-*.maf
-*.mlf
-*.mlt
-*.mtc[0-9]*
-*.slf[0-9]*
-*.slt[0-9]*
-*.stc[0-9]*
-
-# minted
-_minted*
-*.pyg
-
-# morewrites
-*.mw
-
-# newpax
-*.newpax
-
-# nomencl
-*.nlg
-*.nlo
-*.nls
-
-# pax
-*.pax
-
-# pdfpcnotes
-*.pdfpc
-
-# sagetex
-*.sagetex.sage
-*.sagetex.py
-*.sagetex.scmd
-
-# scrwfile
-*.wrt
-
-# svg
-svg-inkscape/
-
-# sympy
-*.sout
-*.sympy
-sympy-plots-for-*.tex/
-
-# pdfcomment
-*.upa
-*.upb
-
-# pythontex
-*.pytxcode
-pythontex-files-*/
-
-# tcolorbox
-*.listing
-
-# thmtools
-*.loe
-
-# TikZ & PGF
-*.dpth
-*.md5
-*.auxlock
-
-# titletoc
-*.ptc
-
-# todonotes
-*.tdo
-
-# vhistory
-*.hst
-*.ver
-
-# easy-todo
-*.lod
-
-# xcolor
-*.xcp
-
-# xmpincl
-*.xmpi
-
-# xindy
-*.xdy
-
-# xypic precompiled matrices and outlines
-*.xyc
-*.xyd
-
-# endfloat
-*.ttt
-*.fff
-
-# Latexian
-TSWLatexianTemp*
-
-## Editors:
-# WinEdt
-*.sav
-
-# Texpad
-.texpadtmp
-
-# LyX
-*.lyx~
-
-# Kile
-*.backup
-
-# gummi
-.*.swp
-
-# KBibTeX
-*~[0-9]*
-
-# TeXnicCenter
-*.tps
-
-# auto folder when using emacs and auctex
-./auto/*
-*.el
-
-# expex forward references with \gathertags
-*-tags.tex
-
-# standalone packages
-*.sta
-
-# Makeindex log files
-*.lpz
-
-# xwatermark package
-*.xwm
-
-# REVTeX puts footnotes in the bibliography by default, unless the nofootinbib
-# option is specified. Footnotes are the stored in a file with suffix Notes.bib.
-# Uncomment the next line to have this generated file ignored.
-#*Notes.bib
-
-### LaTeX Patch ###
-# LIPIcs / OASIcs
-*.vtc
-
-# glossaries
-*.glstex
-
 ### Linux ###
 
 # temporary files which can be created if a process still has a handle open of a deleted file
@@ -806,213 +393,6 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
-### Mercurial ###
-.hg/
-.hgignore
-.hgsigs
-.hgsub
-.hgsubstate
-.hgtags
-
-### Objective-C ###
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
-
-## User settings
-xcuserdata/
-
-## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
-*.xcscmblueprint
-*.xccheckout
-
-## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
-build/
-DerivedData/
-*.moved-aside
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-
-## Obj-C/Swift specific
-*.hmap
-
-## App packaging
-*.ipa
-*.dSYM.zip
-*.dSYM
-
-# CocoaPods
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-# Pods/
-# Add this line if you want to avoid checking in source code from the Xcode workspace
-# *.xcworkspace
-
-# Carthage
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build/
-
-# fastlane
-# It is recommended to not store the screenshots in the git repo.
-# Instead, use fastlane to re-generate the screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://docs.fastlane.tools/best-practices/source-control/#source-control
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
-
-# Code Injection
-# After new code Injection tools there's a generated folder /iOSInjectionProject
-# https://github.com/johnno1962/injectionforxcode
-
-iOSInjectionProject/
-
-### Objective-C Patch ###
-
-### Obsidian ###
-# config dir
-.obsidian/
-
-### Qt ###
-# C++ objects and libs
-
-# Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
-/.qmake.cache
-/.qmake.stash
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
-*.moc
-moc_*.cpp
-moc_*.h
-qrc_*.cpp
-ui_*.h
-*.qmlc
-*.jsc
-Makefile*
-*build-*
-*.qm
-*.prl
-
-# Qt unit tests
-target_wrapper.*
-
-# QtCreator
-*.autosave
-
-# QtCreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
-
-# QtCreator CMake
-CMakeLists.txt.user*
-
-# QtCreator 4.8< compilation database
-
-# QtCreator local machine specific files for imported projects
-*creator.user*
-
-*_qmlcache.qrc
-
-### StdLib ###
-/node_modules
-env.json
-
-### Test ###
-### Ignore all files that could be used to test your code and
-### you wouldn't want to push
-
-# Reference https://en.wikipedia.org/wiki/Metasyntactic_variable
-
-# Most common
-*foo
-*bar
-*fubar
-*foobar
-*baz
-
-# Less common
-*qux
-*quux
-*bongo
-*bazola
-*ztesch
-
-# UK, Australia
-*wibble
-*wobble
-*wubble
-*flob
-*blep
-*blah
-*boop
-*beep
-
-# Japanese
-*hoge
-*piyo
-*fuga
-*hogera
-*hogehoge
-
-# Portugal, Spain
-*fulano
-*sicrano
-*beltrano
-*mengano
-*perengano
-*zutano
-
-# France, Italy, the Netherlands
-*toto
-*titi
-*tata
-*tutu
-*pipppo
-*pluto
-*paperino
-*aap
-*noot
-*mies
-
-# Other names that would make sense
-*tests
-*testsdir
-*testsfile
-*testsfiles
-*test
-*testdir
-*testfile
-*testfiles
-*testing
-*testingdir
-*testingfile
-*testingfiles
-*temp
-*tempdir
-*tempfile
-*tempfiles
-*tmp
-*tmpdir
-*tmpfile
-*tmpfiles
-*lol
-
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]
@@ -1052,73 +432,6 @@ tags
 .history
 .ionide
 
-### Vivado ###
-#########################################################################################################
-##	This is an example .gitignore file for Vivado, please treat it as an example as
-##	it might not be complete. In addition, XAPP 1165 should be followed.
-#########
-#Exclude all
-*
-!*/
-!.gitignore
-###########################################################################
-##	VIVADO
-#Source files:
-#Do NOT ignore VHDL, Verilog, block diagrams or EDIF files.
-!*.vhd
-!*.v
-!*.sv
-!*.bd
-!*.edif
-#IP files
-#.xci: synthesis and implemented not possible - you need to return back to the previous version to generate output products
-#.xci + .dcp: implementation possible but not re-synthesis
-#*.xci(www.spiritconsortium.org)
-!*.xci
-#.xcix: Core container file
-#.xcix: https://www.xilinx.com/support/documentation/sw_manuals/xilinx2016_2/ug896-vivado-ip.pdf (Page 41)
-!*.xcix
-#*.dcp(checkpoint files)
-!*.dcp
-!*.vds
-!*.pb
-#All bd comments and layout coordinates are stored within .ui
-!*.ui
-!*.ooc
-#System Generator
-!*.mdl
-!*.slx
-!*.bxml
-#Simulation logic analyzer
-!*.wcfg
-!*.coe
-#MIG
-!*.prj
-!*.mem
-#Project files
-#XPR  +  *.XML ? XPR (Files are merged into a single XPR file for 2014.1 version)
-#Do NOT ignore *.xpr files
-!*.xpr
-#Include *.xml files for 2013.4 or earlier version
-!*.xml
-#Constraint files
-#Do NOT ignore *.xdc files
-!*.xdc
-#TCL - files
-!*.tcl
-#Journal - files
-!*.jou
-#Reports
-!*.rpt
-!*.txt
-!*.vdi
-#C-files
-!*.c
-!*.h
-!*.elf
-!*.bmm
-!*.xmp
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -1145,113 +458,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-### Xilinx ###
-# gitignore template for Xilinx Vivado Design Suite
-# website: https://www.xilinx.com/support/download.html
-
-# [home]
-*.jou
-*.debug
-*.str
-*.zip
-*.rst
-*.os
-*.js
-*.pb
-*.dcp
-*.hwdef
-*.vds
-*.veo
-*.wdf
-*.vdi
-*.dmp
-*.rpx
-*.rpt
-*_stub.v
-*_stub.vhdl
-*_funcsim.v
-*_funcsim.vhdl
-.project
-
-# [dir]
-*.cache
-*.data
-*.ipdefs
-.Xil
-*.sdk
-*.hw
-*.ip_user_files
-
-### IP synth
-*_synth_*
-
-.jobs
-
-### project synth
-*/*.runs/synth*/*.xml
-*/*.runs/synth*/*.txt
-*/*.runs/synth*/*.sh
-*/*.runs/synth*/*.tcl
-*/*.runs/synth*/*.bat
-*/*.runs/synth*/*.xdc
-!*/*.runs/synth*/*utilization*.rpt
-
-*.runs/synth*/*.xml
-*.runs/synth*/*.txt
-*.runs/synth*/*.sh
-*.runs/synth*/*.tcl
-*.runs/synth*/*.bat
-*.runs/synth*/*.xdc
-!*.runs/synth*/*utilization*.rpt
-
-### project impl
-*/*.runs/impl*/*.xml
-*/*.runs/impl*/*.html
-*/*.runs/impl*/*.txt
-*/*.runs/impl*/*.sh
-*/*.runs/impl*/*.tcl
-*/*.runs/impl*/*.bat
-!*/*.runs/impl*/*utilization*.rpt
-
-*.runs/impl*/*.xml
-*.runs/impl*/*.html
-*.runs/impl*/*.txt
-*.runs/impl*/*.sh
-*.runs/impl*/*.tcl
-*.runs/impl*/*.bat
-!*.runs/impl*/*utilization*.rpt
-
-### block design
-*/*/bd/*/hdl
-*/*/*/bd/*/hdl
-
-*/*/bd/*/*.xdc
-*/*/*/bd/*/*.xdc
-
-*/*/bd/*/ip/*/*.xdc
-*/*/*/bd/*/ip/*/*.xdc
-
-*/*/bd/*/ip/*/*/
-*/*/*/bd/*/ip/*/*/
-
-*/*/bd/*/ip/*/*.vhd
-*/*/*/bd/*/ip/*/*.vhd
-
-*/*/bd/*/ip/*/*.xml
-*/*/*/bd/*/ip/*/*.xml
-
-*.c
-*.h
-*.vho
-*.html
-*/*/bd/*/ip/*/*.tcl
-*/*/*/bd/*/ip/*/*.tcl
-hw_handoff
-ipshared
-
 ### xmake ###
 # Xmake cache
 .xmake/
+build/
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and
@@ -1340,6 +550,7 @@ StyleCopReport.xml
 *.tlh
 *.tmp_proj
 *_wpftmp.csproj
+*.log
 *.tlog
 *.vspscc
 *.vssscc
@@ -1635,5 +846,60 @@ FodyWeavers.xsd
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
 
-# End of https://www.toptal.com/developers/gitignore/api/c,c++,clion,codecomposerstudio,cmake,doxygen,eclipse,emacs,git,iar,keil,latex,linux,macos,mercurial,objective-c,obsidian,qt,stdlib,test,vim,visualstudio,visualstudiocode,vivado,windows,xilinx,xmake
+### Qt ###
+# C++ objects and libs
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.lai
+*.so
+*.so.*
+*.dll
+*.dylib
 
+# Qt-es
+object_script.*.Release
+object_script.*.Debug
+*_plugin_import.cpp
+/.qmake.cache
+/.qmake.stash
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+Makefile*
+*build-*
+*.qm
+*.prl
+
+# Qt unit tests
+target_wrapper.*
+
+# QtCreator
+*.autosave
+
+# QtCreator Qml
+*.qmlproject.user
+*.qmlproject.user.*
+
+# QtCreator CMake
+CMakeLists.txt.user*
+
+# QtCreator 4.8< compilation database
+compile_commands.json
+
+# QtCreator local machine specific files for imported projects
+*creator.user*
+
+*_qmlcache.qrc
+
+# End of https://www.toptal.com/developers/gitignore/api/c,c++,windows,macos,linux,visualstudio,visualstudiocode,codecomposerstudio,eclipse,vim,emacs,cmake,clion,xmake
