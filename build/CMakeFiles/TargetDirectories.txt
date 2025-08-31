@@ -1,0 +1,3 @@
+C:/Users/wdgv/source/repos/libcmor/build/CMakeFiles/libcmor.dir
+C:/Users/wdgv/source/repos/libcmor/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/wdgv/source/repos/libcmor/build/CMakeFiles/ZERO_CHECK.dir
