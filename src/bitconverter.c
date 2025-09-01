@@ -9,7 +9,6 @@ void BitConverter_Init() {
 }
 
 uint8_t BitConverter_Log2Int(uint64_t value) {
-    if (!BitConverter_IsPow2(value)) return 0xFF;
     uint8_t log = 0;
     while (value >>= 1) ++log;
     return log;
