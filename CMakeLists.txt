@@ -11,6 +11,6 @@ set (INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 
 file(GLOB SOURCES "${SRC_DIR}/*.c")
 
-add_library(libcmor STATIC ${SOURCES})
+add_library(libcmor SHARED ${SOURCES})
 
 target_include_directories(libcmor PUBLIC ${INCLUDE_DIR})

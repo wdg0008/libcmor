@@ -1,9 +1,11 @@
 #include "../include/bitconverter.h"
 #include <string.h> // For memcpy
 
+bool g_is_little_endian = true; // == 1 if little-endian
+
 void BitConverter_Init() {
     const uint16_t test = 0x1;
-    bool g_is_little_endian = (*(uint8_t*)&test); // == 1 if little-endian
+    g_is_little_endian = (*(uint8_t*)&test); // == 1 if little-endian
 }
 
 uint8_t BitConverter_Log2Int(uint64_t value) {
@@ -203,7 +205,7 @@ double BitConverter_ToDouble(const uint8_t bytes[8]) {
     return value;
 }
 
-void BitConverter_ReverseBytes(uint8_t* bytes, size_t length) {
+void BitConverter_Reverse_Bytes(uint8_t* bytes, size_t length) {
     for (size_t i = 0; i < length / 2; i++) {
         uint8_t temp = bytes[i];
         bytes[i] = bytes[length - 1 - i];
@@ -211,30 +213,30 @@ void BitConverter_ReverseBytes(uint8_t* bytes, size_t length) {
     }
 }
 
-int16_t BitConverter_ReverseInt16(int16_t value) {
+int16_t BitConverter_Reverse_Int16(int16_t value) {
     return (int16_t)BitConverter_Reverse_UInt16((uint16_t)value);
 }
 
-uint16_t BitConverter_ReverseUInt16(uint16_t value) {
+uint16_t BitConverter_Reverse_UInt16(uint16_t value) {
     return (uint16_t)((value >> 8) | (value << 8));
 }
 
-int32_t BitConverter_ReverseInt32(int32_t value) {
+int32_t BitConverter_Reverse_Int32(int32_t value) {
     return (int32_t)BitConverter_Reverse_UInt32((uint32_t)value);
 }
 
-uint32_t BitConverter_ReverseUInt32(uint32_t value) {
+uint32_t BitConverter_Reverse_UInt32(uint32_t value) {
     return ((value >> 24) & 0xFF) | 
            ((value >> 8) & 0xFF00) | 
            ((value << 8) & 0xFF0000) | 
            ((value << 24) & 0xFF000000);
 }
 
-int64_t BitConverter_ReverseInt64(int64_t value) {
+int64_t BitConverter_Reverse_Int64(int64_t value) {
     return (int64_t)BitConverter_Reverse_UInt64((uint64_t)value);
 }
 
-uint64_t BitConverter_ReverseUInt64(uint64_t value) {
+uint64_t BitConverter_Reverse_UInt64(uint64_t value) {
     uint64_t result = 0;
     for (int i = 0; i < 8; i++) {
         result |= ((value >> (i * 8)) & 0xFF) << ((7 - i) * 8);
@@ -242,19 +244,19 @@ uint64_t BitConverter_ReverseUInt64(uint64_t value) {
     return result;
 }
 
-float BitConverter_ReverseFloat(float value) {
+float BitConverter_Reverse_Float(float value) {
     uint32_t asInt;
     memcpy(&asInt, &value, sizeof(float));
-    asInt = BitConverter_ReverseUInt32(asInt);
+    asInt = BitConverter_Reverse_UInt32(asInt);
     float result;
     memcpy(&result, &asInt, sizeof(float));
     return result;
 }
 
-double BitConverter_ReverseDouble(double value) {
+double BitConverter_Reverse__Double(double value) {
     uint64_t asInt;
     memcpy(&asInt, &value, sizeof(double));
-    asInt = BitConverter_ReverseUInt32(asInt);
+    asInt = BitConverter_Reverse_UInt32(asInt);
     double result;
     memcpy(&result, &asInt, sizeof(double));
     return result;

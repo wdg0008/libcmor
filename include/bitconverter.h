@@ -79,7 +79,7 @@ double BitConverter_ToDouble(const uint8_t bytes[8]);
  * \author William (116991920+wdg0008@users.noreply.github.com)
  * \date 2025-08-31
  */
-void BitConverter_ReverseBytes(uint8_t* bytes, size_t length);
+void BitConverter_Reverse_Bytes(uint8_t* bytes, size_t length);
 
 #define BitConverter_Reverse(x) _Generic((x), \
     int16_t: BitConverter_Reverse_Int16, \
