@@ -1,6 +1,7 @@
 #ifndef ARRAY_H
 #define ARRAY_H
 
+#include <stddef.h>
 #include <stdint.h>
 
 #ifdef __cplusplus

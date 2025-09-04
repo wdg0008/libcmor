@@ -1,4 +1,4 @@
-#include "..\include\array.h"
+#include "array.h"
 
 /*!
  * \brief Defines functions to calculate array averages for various data types.

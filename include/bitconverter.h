@@ -1,6 +1,7 @@
 #ifndef BITCONVERTER_H
 #define BITCONVERTER_H
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
 
