@@ -1,4 +1,16 @@
+/*!
+ * \file array.c
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \brief Provides function implementations for array manipulation.
+ * \version 0.1
+ * \date 2025-09-04
+ * 
+ * \copyright Copyright (c) 2025
+ * 
+ */
+
 #include "array.h"
+#include "metamacros.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -21,16 +33,7 @@
     return sum / length;\
 }
 
-    GM_AVG_DEFINE(int8_t)
-    GM_AVG_DEFINE(int16_t)
-    GM_AVG_DEFINE(int32_t)
-    GM_AVG_DEFINE(int64_t)
-    GM_AVG_DEFINE(uint8_t)
-    GM_AVG_DEFINE(uint16_t)
-    GM_AVG_DEFINE(uint32_t)
-    GM_AVG_DEFINE(uint64_t)
-    GM_AVG_DEFINE(float)
-    GM_AVG_DEFINE(double)
+TYPE_ITERATOR(GM_AVG_DEFINE) // Define average functions
 
 #undef GM_AVG_DEFINE
 
@@ -38,6 +41,18 @@
 
 #define MEMSWAP_ARR(a, b, T) memswap(a, b, sizeof(T))
 
+/*!
+ * \brief Swaps two memory regions of given size.
+ * 
+ * \param a Pointer to the first memory region.
+ * \param b Pointer to the second memory region.
+ * \param size The number of bytes to swap.
+ * \warning The memory regions must be the same size and non-overlapping.
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
 void memswap(void* a, void* b, size_t size) {
     uint8_t temp[size];
     memcpy(temp, a, size);
@@ -45,47 +60,80 @@ void memswap(void* a, void* b, size_t size) {
     memcpy(b, temp, size);
 }
 
+/*!
+ * \brief Macro for generic swap function definitions.
+ * \remarks Swaps two variables using a temporary variable.
+ * Call it using reference operators, as in swap(&a, &b);
+ *
+ * \warning Make sure the pointers are valid and of the same type!
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
 #define GM_SWAP_DEFINE(T) void swap_##T(T* a, T* b) { \
     T temp = *a; \
     *a = *b; \
     *b = temp; \
 }
-    GM_SWAP_DEFINE(int8_t)
-    GM_SWAP_DEFINE(int16_t)
-    GM_SWAP_DEFINE(int32_t)
-    GM_SWAP_DEFINE(int64_t)
-    GM_SWAP_DEFINE(uint8_t)
-    GM_SWAP_DEFINE(uint16_t)
-    GM_SWAP_DEFINE(uint32_t)
-    GM_SWAP_DEFINE(uint64_t)
-    GM_SWAP_DEFINE(float)
-    GM_SWAP_DEFINE(double) 
+
+TYPE_ITERATOR(GM_SWAP_DEFINE) // Define swap functions
 
 #undef GM_SWAP_DEFINE
 
-void QuickSort(TSort data[], int start, int stop) { // the wrapper function for quicksort
-    if (start < stop) { // the call is valid because there are elements to sort
-        int partitionIndex = partition(data, start, stop); // find the partition
-        QuickSort(data, start, partitionIndex - 1);
-        QuickSort(data, partitionIndex + 1, stop);
-    }
-    return; // skips to here on a bad call, arrives here on a good one
+/*!
+ * \brief Macro for generic QuickSort function definitions.
+ * \remarks Recusively sorts the array in place.
+ * Calls the \ref partition function-like macro to partition the array.
+
+ * \warning This function only validates order of indices and does not check for out-of-bounds access.
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define QUICK_SORT_DEFINE(T) void QuickSort_##T(T data[], int start, int stop) { \
+    if (start < stop) { \
+        int partitionIndex = partition(data, start, stop); \
+        QuickSort(data, start, partitionIndex - 1); \
+        QuickSort(data, partitionIndex + 1, stop); \
+    } \
+    return; \
 }
 
-int partition(TSort data[], int leftend, int rightend) { // the partitioning does ALL the work
-    TSort pivot = data[(leftend+rightend)/2]; // the pivot point to start the chaos
-    // the pivot is selected at the middle in case it is already sorted
-    int i = leftend - 1; // left-hand iteraror variable
-    int j = rightend + 1; // right-hand iterator variable
-    while (true) { // looks weird, but lets the return be more elegant
-        do { // do-whiles ensure that variables are always valid indices
-            i++; // moves i from Left to Right (LTR)
-        } while (data[i] < pivot);
-        do {
-            j--; // moves j from RIght to Left (RTL)
-        } while (data[j] > pivot);
-        if (i >= j) // we got to the middle
-            return j; // all done here
-        swap(&data[i], &data[j]); // swaps like the book, but doesn't have to undo
-    }
+TYPE_ITERATOR(QUICK_SORT_DEFINE) // Define quicksort functions
+
+#undef QUICK_SORT_DEFINE
+
+/*!
+ * \brief Macro for generic partition function definitions.
+ * Chooses the middle element as a pivot to minimize worst-case performance on sorted data.
+ * Uses the Hoare partition scheme. i is the LHS iterator, and j the is RHS iterator.
+ * The do-whiles ensure that variables are always valid indices.
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define PARTITION_DEFINE(T) int partition_##T(T data[], int leftend, int rightend) { \
+    T pivot = data[(leftend+rightend)/2]; \
+    int i = leftend - 1; \
+    int j = rightend + 1; \
+    while (true) { \
+        do { \
+            i++; \
+        } while (data[i] < pivot); \
+        do { \
+            j--; \
+        } while (data[j] > pivot); \
+        if (i >= j) \
+            return j; \
+        swap(&data[i], &data[j]); \
+    } \
 }
+
+TYPE_ITERATOR(PARTITION_DEFINE) // Define partition functions
+
+#undef PARTITION_DEFINE

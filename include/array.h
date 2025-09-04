@@ -1,15 +1,30 @@
+/*!
+ * \file array.h
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \brief Provides array manipulation utilities (averaging, sorting, swapping, etc.)
+ * \remarks Makes extensive use of C11 _Generic for type-generic programming.
+ * Also uses \ref metamacros.h for iterating thhrough all of those types.
+ *
+ * \version 0.1
+ * \date 2025-09-04
+ * 
+ * \copyright Copyright (c) 2025
+ * 
+ */
+
 #ifndef ARRAY_H
 #define ARRAY_H
 
 #include <stddef.h>
 #include <stdint.h>
+#include "metamacros.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /*! \brief Swaps two variables in place using XOR bitwise operation. */
-#define SWAP(a,b) (((a) ^ (b)) && ((b) ^= (a) ^= (b), (a) ^= (b)))
+#define SWAP_INPLACE(a,b) (((a) ^ (b)) && ((b) ^= (a) ^= (b), (a) ^= (b)))
 
 /*! \brief The type returned by the average functions. */
 typedef double TAvg;
@@ -24,85 +39,79 @@ typedef double TAvg;
  */
 #define GM_AVG_DECLARE(T) TAvg Array_TAvg_##T(const T* arr, size_t length);
 
-    GM_AVG_DECLARE(int8_t)
-    GM_AVG_DECLARE(int16_t)
-    GM_AVG_DECLARE(int32_t)
-    GM_AVG_DECLARE(int64_t)
-    GM_AVG_DECLARE(uint8_t)
-    GM_AVG_DECLARE(uint16_t)
-    GM_AVG_DECLARE(uint32_t)
-    GM_AVG_DECLARE(uint64_t)
-    GM_AVG_DECLARE(float)
-    GM_AVG_DECLARE(double)
+    TYPE_ITERATOR(GM_AVG_DECLARE) // Declare average functions
 
 #undef GM_AVG_DECLARE
 
 /*!
- * \brief Shorthand for generic average function selection based on array type.
+ * \brief Generic macro to compute the average of an array.
+ * 
  * \version 0.1
  * \author William (116991920+wdg0008@users.noreply.github.com)
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-#define ARR_AVG_LOOKUP(T) T*: Array_TAvg_##T
-
-    /*!
-     * \brief Generic macro to compute the average of an array.
-     * 
-     * \version 0.1
-     * \author William (116991920+wdg0008@users.noreply.github.com)
-     * \date 2025-08-31
-     * \copyright Copyright (c) 2025
-     */
-    #define Array_TAvg(arr, length) (_Generic((arr), \
-        ARR_AVG_LOOKUP(int8_t), \
-        ARR_AVG_LOOKUP(int16_t), \
-        ARR_AVG_LOOKUP(int32_t), \
-        ARR_AVG_LOOKUP(int64_t), \
-        ARR_AVG_LOOKUP(uint8_t), \
-        ARR_AVG_LOOKUP(uint16_t), \
-        ARR_AVG_LOOKUP(uint32_t), \
-        ARR_AVG_LOOKUP(uint64_t), \
-        ARR_AVG_LOOKUP(float), \
-        ARR_AVG_LOOKUP(double) \
-    )(arr, length))
-
-#undef ARR_AVG_LOOKUP
+#define Array_TAvg(arr, length) (_Generic((arr), \
+    TYPE_PTR_TABLE(Array_TAvg) \
+)(arr, length))
 
 #define GM_SWAP_DECLARE(T) void swap_##T(T* a, T* b);
 
-    GM_SWAP_DECLARE(int8_t)
-    GM_SWAP_DECLARE(int16_t)
-    GM_SWAP_DECLARE(int32_t)
-    GM_SWAP_DECLARE(int64_t)
-    GM_SWAP_DECLARE(uint8_t)
-    GM_SWAP_DECLARE(uint16_t)
-    GM_SWAP_DECLARE(uint32_t)
-    GM_SWAP_DECLARE(uint64_t)
-    GM_SWAP_DECLARE(float)
-    GM_SWAP_DECLARE(double)
+    TYPE_ITERATOR(GM_SWAP_DECLARE) // Declare swap functions
 
 #undef GM_SWAP_DECLARE
 
+/*!
+ * \brief Generic macro to swap two variables of the same type.
+ * \warning Do not call this on two variables of different types!
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
 #define swap(a, b) _Generic((a), \
-    int8_t *: swap_int8_t, \
-    int16_t *: swap_int16_t, \
-    int32_t *: swap_int32_t, \
-    int64_t *: swap_int64_t, \
-    uint8_t *: swap_uint8_t, \
-    uint16_t *: swap_uint16_t, \
-    uint32_t *: swap_uint32_t, \
-    uint64_t *: swap_uint64_t, \
-    float *: swap_float, \
-    double *: swap_double \
+    TYPE_PTR_TABLE(swap) \
 )(a, b)
 
+#define QUICK_SORT_DECLARE(T) void QuickSort_##T(T data[], int start, int stop);
 
-typedef uint8_t TSort;
+    TYPE_ITERATOR(QUICK_SORT_DECLARE) // Declare quicksort functions
 
-void QuickSort(TSort data[], int start, int stop);
+#undef QUICK_SORT_DECLARE
 
-int partition(TSort data[], int leftend, int rightend);
+/*!
+ * \brief Generic macro to perform quicksort on an array.
+ * \remark This soorts the array in place using recirsvie function calls.
+ * \warning Be careful with array bounds! Total length is irrelevant.
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define QuickSort(data, start, stop) _Generic((data), \
+    TYPE_PTR_TABLE(QuickSort) \
+)(data, start, stop)
+
+#define PARTITION_DECLARE(T) int partition_##T(T data[], int leftend, int rightend);
+
+    TYPE_ITERATOR(PARTITION_DECLARE) // Declare partition functions
+
+#undef PARTITION_DECLARE
+
+/*!
+ * \brief Generic macro to partition an array for quicksort.
+ * \remark This is called internally by QuickSort; you should not need to call it directly.
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define partition(data, leftend, rightend) _Generic((data), \
+    TYPE_PTR_TABLE(partition) \
+)(data, leftend, rightend)
 
 
 /*******************************************************************
