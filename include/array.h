@@ -69,40 +69,45 @@ typedef double TAvg;
 
 #undef ARR_AVG_LOOKUP
 
+#define GM_SWAP_DECLARE(T) void swap_##T(T* a, T* b);
+
+    GM_SWAP_DECLARE(int8_t)
+    GM_SWAP_DECLARE(int16_t)
+    GM_SWAP_DECLARE(int32_t)
+    GM_SWAP_DECLARE(int64_t)
+    GM_SWAP_DECLARE(uint8_t)
+    GM_SWAP_DECLARE(uint16_t)
+    GM_SWAP_DECLARE(uint32_t)
+    GM_SWAP_DECLARE(uint64_t)
+    GM_SWAP_DECLARE(float)
+    GM_SWAP_DECLARE(double)
+
+#undef GM_SWAP_DECLARE
+
+#define swap(a, b) _Generic((a), \
+    int8_t *: swap_int8_t, \
+    int16_t *: swap_int16_t, \
+    int32_t *: swap_int32_t, \
+    int64_t *: swap_int64_t, \
+    uint8_t *: swap_uint8_t, \
+    uint16_t *: swap_uint16_t, \
+    uint32_t *: swap_uint32_t, \
+    uint64_t *: swap_uint64_t, \
+    float *: swap_float, \
+    double *: swap_double \
+)(a, b)
+
+
+typedef uint8_t TSort;
+
+void QuickSort(TSort data[], int start, int stop);
+
+int partition(TSort data[], int leftend, int rightend);
+
+
 /*******************************************************************
 TODO: Convert the following to regular C functions.
-
-
-void QuickSort(std::string data[], int start, int stop) { // the wrapper function for quicksort
-    if (start < stop) { // the call is valid because there are elements to sort
-        int partitionIndex = partition(data, start, stop); // find the partition
-        QuickSort(data, start, partitionIndex - 1);
-        QuickSort(data, partitionIndex + 1, stop);
-        // TestDump(data, stop - start, 5); // TODO: REMOVE BEFORE FLIGHT!!!!!
-    }
-    return; // skips to here on a bad call, arrives here on a good one
-}
-
-int partition(std::string words[], int leftend, int rightend) { // the partitioning does ALL the work
-    std::string pivot = words[(leftend+rightend)/2]; // the pivot point to start the chaos
-    // the pivot is selected at the middle in case it is already sorted
-    pivot = LowerString(pivot); // comparisons should all be based on lowercase strings
-    int i = leftend - 1; // left-hand iteraror variable
-    int j = rightend + 1; // right-hand iterator variable
-    while (true) { // looks weird, but lets the return be more elegant
-        do { // do-whiles ensure that variables are always valid indices
-            i++; // moves i from Left to Right (LTR)
-        } while (LowerString(words[i]).compare(pivot) < 0);
-        do {
-            j--; // moves j from RIght to Left (RTL)
-        } while (LowerString(words[j]).compare(pivot) > 0);
-        if (i >= j) // we got to the middle
-            return j; // all done here
-        std::swap(words[i], words[j]); // swaps like the book, but doesn't have to undo
-    }
-}
-
-void MergeSort(std::string A[], int left, int right, std::string temp[]) {
+void MergeSort(TSort A[], int left, int right, TSort temp[]) {
     if (left < right) { // this means there is data to sort (left < right)
         int mid = (left + right) / 2; // C++ always does the floor of int div
         MergeSort(A, left, mid, temp);
@@ -113,7 +118,7 @@ void MergeSort(std::string A[], int left, int right, std::string temp[]) {
     return; // explicit calls to return make me happier (not much, but it helps)
 }
 
-void merge(std::string A[], int left, int leftend, int right, int rightend, std::string temp[]) {
+void merge(TSort A[], int left, int leftend, int right, int rightend, TSort temp[]) {
     // go from 0 to n/2 and (n/2)+1 to n-1
     // each half is already sorted, we are now combining them
     int SaveStart = left;
