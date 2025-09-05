@@ -134,6 +134,76 @@ TYPE_ITERATOR(QUICK_SORT_DEFINE) // Define quicksort functions
     } \
 }
 
-TYPE_ITERATOR(PARTITION_DEFINE) // Define partition functions
+    TYPE_ITERATOR(PARTITION_DEFINE) // Define partition functions
 
 #undef PARTITION_DEFINE
+
+/*!
+ * \brief Macro for generic MergeSort function definitions.
+ * \remarks Recusively sorts the array in place using a temporary array of equal size.
+ * The temporary array must be allocated by the caller and is reused in recursive calls.
+ * The \ref merge function-like macro is called to merge the two sorted halves.
+ * The midpoint calculation relies on integer division flooring.
+ *
+ * \warning This function only validates order of indices and does not check for out-of-bounds access.
+ * 
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define MERGE_SORT_DEFINE(T) void MergeSort_##T(T A[], int left, int right, T temp[]) { \
+    if (left < right) { \
+        int mid = (left + right) / 2; \
+        MergeSort(A, left, mid, temp); \
+        MergeSort(A, mid + 1, right, temp); \
+        merge(A, left, mid, mid + 1, right, temp); \
+    } \
+    return; \
+}
+
+    TYPE_ITERATOR(MERGE_SORT_DEFINE) // Define merge sort functions
+
+#undef MERGE_SORT_DEFINE
+
+/*!
+ * \brief Merges two sorted subarrays into a single sorted array.
+ * \remarks Unlike \ref MergeSort, this function is not recursive.
+ * Data is copied into the temporary array and then back to the original array.
+ * This function is called internally by \ref MergeSort and not meant to be called directly.
+ *
+ * \warning Out-of-bounds access is not checked, and temp must be the same size as A.
+ *
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-04
+ * \copyright Copyright (c) 2025
+ */
+#define MERGE_DEFINE(T) void merge_##T(T A[], int left, int leftend, int right, int rightend, T temp[]) { \
+    int SaveStart = left; \
+    int index = left; \
+    while (left <= leftend && right <= rightend) { \
+        if (A[left] < A[right]) { \
+            temp[index++] = A[left++]; \
+        } \
+        else if (A[left] > A[right]) { \
+            temp[index++] = A[right++]; \
+        } \
+        else { \
+            temp[index++] = A[left++]; \
+        } \
+    } \
+    while (left <= leftend) { \
+        temp[index++] = A[left++]; \
+    } \
+    while (right <= rightend) { \
+        temp[index++] = A[right++]; \
+    } \
+    for (int i = SaveStart; i <= rightend; i++) { \
+        A[i] = temp[i]; \
+    } \
+}
+
+    TYPE_ITERATOR(MERGE_DEFINE) // Define merge functions
+
+#undef MERGE_DEFINE
