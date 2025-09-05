@@ -4,19 +4,12 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include "metamacros.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef int8_t Int8, int8, i8;
-typedef uint8_t UInt8, uint8, u8;
-typedef int16_t Int16, int16, i16;
-typedef uint16_t UInt16, uint16, u16;
-typedef int64_t Int64, int64, i64;
-typedef uint32_t UInt32, uint32, u32;
-typedef int32_t Int32, int32, i32;
-typedef uint64_t UInt64, uint64, u64;
 
 extern bool g_is_little_endian; //!< Set by BitConverter_Init()
 
@@ -57,7 +50,7 @@ inline bool BitConverter_IsPow2(uint64_t value) {
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-double BitConverter_DoubleFromUInt64(uint64_t value);
+double BitConverter_doubleFromuint64_t(uint64_t value);
 
 /*!
  * \brief Constructs a float from its uint32_t representation.
@@ -69,7 +62,7 @@ double BitConverter_DoubleFromUInt64(uint64_t value);
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-float BitConverter_FloatFromUInt32(uint32_t value);
+float BitConverter_floatFromuint32_t(uint32_t value);
 
 /*!
  * \brief Extracts the uint64_t representation of a double.
@@ -81,7 +74,7 @@ float BitConverter_FloatFromUInt32(uint32_t value);
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-uint64_t BitConverter_UInt64FromDouble(double value);
+uint64_t BitConverter_uint64_tFromdouble(double value);
 
 /*!
  * \brief Extracts the uint32_t representation of a float.
@@ -93,7 +86,7 @@ uint64_t BitConverter_UInt64FromDouble(double value);
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-uint32_t BitConverter_UInt32FromFloat(float value);
+uint32_t BitConverter_uint32_tFromfloat(float value);
 
 /*!
  * \brief Generic macro to extract bytes from various data types.
@@ -106,48 +99,41 @@ uint32_t BitConverter_UInt32FromFloat(float value);
  * \copyright Copyright (c) 2025
  */
 #define BitConverter_GetBytes(x, byteArr) _Generic((x), \
-    int16_t: BitConverter_GetBytes_Int16, \
-    int32_t: BitConverter_GetBytes_Int32, \
-    int64_t: BitConverter_GetBytes_Int64, \
-    uint16_t: BitConverter_GetBytes_UInt16, \
-    uint32_t: BitConverter_GetBytes_UInt32, \
-    uint64_t: BitConverter_GetBytes_UInt64, \
-    float: BitConverter_GetBytes_Float, \
-    double: BitConverter_GetBytes_Double \
+    TYPE_TABLE(BitConverter_GetBytes) \
 )(x, byteArr)
 
-void BitConverter_GetBytes_Int16(int16_t value, uint8_t bytes[2]);
-void BitConverter_GetBytes_Int32(int32_t value, uint8_t bytes[4]);
-void BitConverter_GetBytes_Int64(int64_t value, uint8_t bytes[8]);
-void BitConverter_GetBytes_UInt16(uint16_t value, uint8_t bytes[2]);
-void BitConverter_GetBytes_UInt32(uint32_t value, uint8_t bytes[4]);
-void BitConverter_GetBytes_UInt64(uint64_t value, uint8_t bytes[8]);
-void BitConverter_GetBytes_Float(float value, uint8_t bytes[4]);
-void BitConverter_GetBytes_Double(double value, uint8_t bytes[8]);
+void BitConverter_GetBytes_int16_t(int16_t value, uint8_t bytes[2]);
+void BitConverter_GetBytes_int32_t(int32_t value, uint8_t bytes[4]);
+void BitConverter_GetBytes_int64_t(int64_t value, uint8_t bytes[8]);
+void BitConverter_GetBytes_uint16_t(uint16_t value, uint8_t bytes[2]);
+void BitConverter_GetBytes_uint32_t(uint32_t value, uint8_t bytes[4]);
+void BitConverter_GetBytes_uint64_t(uint64_t value, uint8_t bytes[8]);
+void BitConverter_GetBytes_float(float value, uint8_t bytes[4]);
+void BitConverter_GetBytes_double(double value, uint8_t bytes[8]);
 
 /*! \brief Constructs a value from its byte representation. */
-int16_t BitConverter_ToInt16(const uint8_t bytes[2]);
+int16_t BitConverter_To_int16_t(const uint8_t bytes[2]);
 
 /*! \brief Constructs a value from its byte representation. */
-int32_t BitConverter_ToInt32(const uint8_t bytes[4]);
+int32_t BitConverter_To_int32_t(const uint8_t bytes[4]);
 
 /*! \brief Constructs a value from its byte representation. */
-int64_t BitConverter_ToInt64(const uint8_t bytes[8]);
+int64_t BitConverter_To_int64_t(const uint8_t bytes[8]);
 
 /*! \brief Constructs a value from its byte representation. */
-uint16_t BitConverter_ToUInt16(const uint8_t bytes[2]);
+uint16_t BitConverter_To_uint16_t(const uint8_t bytes[2]);
 
 /*! \brief Constructs a value from its byte representation. */
-uint32_t BitConverter_ToUInt32(const uint8_t bytes[4]);
+uint32_t BitConverter_To_uint32_t(const uint8_t bytes[4]);
 
 /*! \brief Constructs a value from its byte representation. */
-uint64_t BitConverter_ToUInt64(const uint8_t bytes[8]);
+uint64_t BitConverter_To_uint64_t(const uint8_t bytes[8]);
 
 /*! \brief Constructs a value from its byte representation. */
-float BitConverter_ToFloat(const uint8_t bytes[4]);
+float BitConverter_To_float(const uint8_t bytes[4]);
 
 /*! \brief Constructs a value from its byte representation. */
-double BitConverter_ToDouble(const uint8_t bytes[8]);
+double BitConverter_To_double(const uint8_t bytes[8]);
 
 /**
  * \brief Swaps the byte order of the given byte array in-place.
@@ -169,24 +155,17 @@ void BitConverter_Reverse_Bytes(uint8_t* bytes, size_t length);
  * \copyright Copyright (c) 2025
  */
 #define BitConverter_Reverse(x) _Generic((x), \
-    int16_t: BitConverter_Reverse_Int16, \
-    int32_t: BitConverter_Reverse_Int32, \
-    int64_t: BitConverter_Reverse_Int64, \
-    uint16_t: BitConverter_Reverse_UInt16, \
-    uint32_t: BitConverter_Reverse_UInt32, \
-    uint64_t: BitConverter_Reverse_UInt64, \
-    float: BitConverter_Reverse_Float, \
-    double: BitConverter_Reverse_Double  \
+    TYPE_TABLE(BitConverter_Reverse) \
 )(x)
 
-int16_t BitConverter_Reverse_Int16(int16_t value);
-int32_t BitConverter_Reverse_Int32(int32_t value);
-int64_t BitConverter_Reverse_Int64(int64_t value);
-uint16_t BitConverter_Reverse_UInt16(uint16_t value);
-uint32_t BitConverter_Reverse_UInt32(uint32_t value);
-uint64_t BitConverter_Reverse_UInt64(uint64_t value);
-float BitConverter_Reverse_Float(float value);
-double BitConverter_Reverse_Double(double value);
+int16_t BitConverter_Reverse_int16_t(int16_t value);
+int32_t BitConverter_Reverse_int32_t(int32_t value);
+int64_t BitConverter_Reverse_int64_t(int64_t value);
+uint16_t BitConverter_Reverse_uint16_t(uint16_t value);
+uint32_t BitConverter_Reverse_uint32_t(uint32_t value);
+uint64_t BitConverter_Reverse_uint64_t(uint64_t value);
+float BitConverter_Reverse_float(float value);
+double BitConverter_Reverse_double(double value);
 
 /*!
  * \brief Concatenates two smaller values into a larger one.
@@ -200,22 +179,16 @@ double BitConverter_Reverse_Double(double value);
  * \copyright Copyright (c) 2025
  */
 #define BitConverter_Join(x, y) _Generic((x), \
-    int8_t: BitConverter_Join_Int16, \
-    int16_t: BitConverter_Join_Int32, \
-    int32_t: BitConverter_Join_Int64, \
-    uint8_t: BitConverter_Join_UInt16, \
-    uint16_t: BitConverter_Join_UInt32, \
-    uint32_t: BitConverter_Join_UInt64, \
-    float: BitConverter_Join_Double  \
+    TYPE_TABLE(BitConverter_Join) \
 )(x, y)
 
-int16_t BitConverter_Join_Int16(int8_t high, int8_t low);
-int32_t BitConverter_Join_Int32(int16_t high, int16_t low);
-int64_t BitConverter_Join_Int64(int32_t high, int32_t low);
-uint16_t BitConverter_Join_UInt16(uint8_t high, uint8_t low);
-uint32_t BitConverter_Join_UInt32(uint16_t high, uint16_t low);
-uint64_t BitConverter_Join_UInt64(uint32_t high, uint32_t low);
-double BitConverter_Join_Double(float high, float low);
+int16_t BitConverter_Join_int16_t(int8_t high, int8_t low);
+int32_t BitConverter_Join_int32_t(int16_t high, int16_t low);
+int64_t BitConverter_Join_int64_t(int32_t high, int32_t low);
+uint16_t BitConverter_Join_uint16_t(uint8_t high, uint8_t low);
+uint32_t BitConverter_Join_uint32_t(uint16_t high, uint16_t low);
+uint64_t BitConverter_Join_uint64_t(uint32_t high, uint32_t low);
+double BitConverter_Join_double(float high, float low);
 
 /*!
  * \brief Splits a larger value into two smaller parts.
@@ -229,22 +202,16 @@ double BitConverter_Join_Double(float high, float low);
  * \copyright Copyright (c) 2025
  */
 #define BitConverter_Split(x, highPtr, lowPtr) _Generic((x), \
-    int16_t: BitConverter_Split_Int16, \
-    int32_t: BitConverter_Split_Int32, \
-    int64_t: BitConverter_Split_Int64, \
-    uint32_t: BitConverter_Split_UInt32, \
-    uint16_t: BitConverter_Split_UInt16, \
-    uint64_t: BitConverter_Split_UInt64, \
-    double: BitConverter_Split_Double  \
+    TYPE_TABLE(BitConverter_Split) \
 )(x, highPtr, lowPtr)
 
-void BitConverter_Split_Int16(int16_t value, int8_t* high, int8_t* low);
-void BitConverter_Split_Int32(int32_t value, int16_t* high, int16_t* low);
-void BitConverter_Split_Int64(int64_t value, int32_t* high, int32_t* low);
-void BitConverter_Split_UInt16(uint16_t value, uint8_t* high, uint8_t* low);
-void BitConverter_Split_UInt32(uint32_t value, uint16_t* high, uint16_t* low);
-void BitConverter_Split_UInt64(uint64_t value, uint32_t* high, uint32_t* low);
-void BitConverter_Split_Double(double value, float* high, float* low);
+void BitConverter_Split_int16_t(int16_t value, int8_t* high, int8_t* low);
+void BitConverter_Split_int32_t(int32_t value, int16_t* high, int16_t* low);
+void BitConverter_Split_int64_t(int64_t value, int32_t* high, int32_t* low);
+void BitConverter_Split_uint16_t(uint16_t value, uint8_t* high, uint8_t* low);
+void BitConverter_Split_uint32_t(uint32_t value, uint16_t* high, uint16_t* low);
+void BitConverter_Split_uint64_t(uint64_t value, uint32_t* high, uint32_t* low);
+void BitConverter_Split_double(double value, float* high, float* low);
 
 #ifdef __cplusplus
 }
