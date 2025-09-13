@@ -207,3 +207,27 @@ TYPE_ITERATOR(QUICK_SORT_DEFINE) // Define quicksort functions
     TYPE_ITERATOR(MERGE_DEFINE) // Define merge functions
 
 #undef MERGE_DEFINE
+
+typedef long T;
+
+void convolve(T x[], size_t x_len, T h[], size_t h_len, T y[], size_t y_len) {
+    if (y_len < x_len + h_len - 1) {
+        // Output array is too small
+        return;
+    }
+
+    memset(y, 0, y_len * sizeof(T)); // Initialize output array to zero
+
+    size_t d, m_min, m_max; // control and cached variables
+
+    for (size_t n = 0; n < y_len; n++) {
+        m_min = (n >= h_len - 1) ? (n - (h_len - 1)) : 0; // picks the larger value
+        m_max = (n < x_len) ? n : (x_len - 1); // picks the smaller value
+        for (size_t m = 0; m <= m_max; m++) {
+            d = n - m;
+            if (d >= 0 && d < h_len) {
+                y[n] += x[m] * h[d];
+            }
+        }
+    }
+}
