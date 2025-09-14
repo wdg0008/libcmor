@@ -208,26 +208,25 @@ TYPE_ITERATOR(QUICK_SORT_DEFINE) // Define quicksort functions
 
 #undef MERGE_DEFINE
 
-typedef long T;
-
-void convolve(T x[], size_t x_len, T h[], size_t h_len, T y[], size_t y_len) {
-    if (y_len < x_len + h_len - 1) {
-        // Output array is too small
-        return;
-    }
-
-    memset(y, 0, y_len * sizeof(T)); // Initialize output array to zero
-
-    size_t d, m_min, m_max; // control and cached variables
-
-    for (size_t n = 0; n < y_len; n++) {
-        m_min = (n >= h_len - 1) ? (n - (h_len - 1)) : 0; // picks the larger value
-        m_max = (n < x_len) ? n : (x_len - 1); // picks the smaller value
-        for (size_t m = 0; m <= m_max; m++) {
-            d = n - m;
-            if (d >= 0 && d < h_len) {
-                y[n] += x[m] * h[d];
-            }
-        }
-    }
+#define CONVOLVE_DEFINE(T) \
+void convolve_##T(const T x[], size_t x_len, \
+                  const T h[], size_t h_len, \
+                  T y[], size_t y_len) { \
+    if (!x || !h || !y) return; \
+    if (x_len == 0 || h_len == 0 || y_len == 0) return; \
+    if (y_len < x_len + h_len - 1) return; \
+    \
+    memset(y, 0, y_len * sizeof(T)); \
+    \
+    for (size_t n = 0; n < x_len + h_len - 1; n++) { \
+        size_t m_min = (n >= h_len - 1) ? (n - (h_len - 1)) : 0; \
+        size_t m_max = (n < x_len - 1) ? n : (x_len - 1); \
+        for (size_t m = m_min; m <= m_max; m++) { \
+            y[n] += x[m] * h[n - m]; \
+        } \
+    } \
 }
+
+    TYPE_ITERATOR(CONVOLVE_DEFINE) // Define convolution functions
+
+#undef CONVOLVE_DEFINE

@@ -151,6 +151,38 @@ typedef double TAvg;
     TYPE_PTR_TABLE(merge) \
 )(A, left, leftend, right, rightend, temp)
 
+#define CONVOLVE_DECLARE(T) \
+void convolve_##T(const T x[], size_t x_len, \
+                  const T h[], size_t h_len, \
+                  T y[], size_t y_len);
+
+    TYPE_ITERATOR(CONVOLVE_DECLARE) // Declare convolution functions
+
+#undef CONVOLVE_DECLARE
+
+/*!
+ * \brief Macro for generic convolution function definitions.
+ * \remarks Computes the discrete linear convolution of two sequences.
+ * This implementation uses the direct summation method in O(N*M) time complexity.
+ * \warning The output array y must be preallocated and of sufficient size (at least x_len + h_len - 1).
+ * For invalid inputs (NULL pointers or zero lengths), the function does nothing. 
+ *
+ * \param x Input array (signal).
+ * \param x_len Number of elements in input array x.
+ * \param h Impulse response array (kernel).
+ * \param h_len Number of elements in impulse response array h.
+ * \param y Output array to store the convolution result.
+ * \param y_len Number of elements in output array y.
+ *
+ * \version 0.1
+ * \author William (116991920+wdg0008@users.noreply.github.com)
+ * \date 2025-09-13
+ * \copyright Copyright (c) 2025
+ */
+#define convolve(x, x_len, h, h_len, y, y_len) _Generic((x), \
+    TYPE_PTR_TABLE(convolve) \
+)(x, x_len, h, h_len, y, y_len)
+
 #ifdef __cplusplus
 }
 #endif
