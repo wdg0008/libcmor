@@ -22,11 +22,11 @@
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-#define GM_AVG_DEFINE(T) TAvg Array_TAvg_##T(const T* arr, size_t length) {\
+#define GM_AVG_DEFINE(T) double Array_Avg_##T(const T* arr, size_t length) {\
     if (length == 0) {\
         return 0.0;\
     }\
-    TAvg sum = 0.0;\
+    double sum = 0.0;\
     for (size_t i = 0; i < length; ++i) {\
         sum += arr[i];\
     }\

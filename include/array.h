@@ -26,9 +26,6 @@ extern "C" {
 /*! \brief Swaps two variables in place using XOR bitwise operation. */
 #define SWAP_INPLACE(a,b) (((a) ^ (b)) && ((b) ^= (a) ^= (b), (a) ^= (b)))
 
-/*! \brief The type returned by the average functions. */
-typedef double TAvg;
-
 /*!
  * \brief Shorthand for declaring average functions for different types.
  * 
@@ -37,7 +34,7 @@ typedef double TAvg;
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-#define GM_AVG_DECLARE(T) TAvg Array_TAvg_##T(const T* arr, size_t length);
+#define GM_AVG_DECLARE(T) double Array_Avg_##T(const T* arr, size_t length);
 
     TYPE_ITERATOR(GM_AVG_DECLARE) // Declare average functions
 
@@ -51,8 +48,8 @@ typedef double TAvg;
  * \date 2025-08-31
  * \copyright Copyright (c) 2025
  */
-#define Array_TAvg(arr, length) (_Generic((arr), \
-    TYPE_PTR_TABLE(Array_TAvg) \
+#define Array_Avg(arr, length) (_Generic((arr), \
+    TYPE_PTR_TABLE(Array_Avg) \
 )(arr, length))
 
 #define GM_SWAP_DECLARE(T) void swap_##T(T* a, T* b);
