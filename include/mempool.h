@@ -12,6 +12,10 @@
 
 #include <string.h>
 #include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
  
 typedef struct {
     unsigned char *buf;
@@ -37,3 +41,7 @@ void mp_free(MemoryPool *pool, void *ptr);
 size_t mp_openBlocks(const MemoryPool *pool);
 
 bool mp_isEmpty(const MemoryPool *pool);
+
+#ifdef __cplusplus
+}
+#endif

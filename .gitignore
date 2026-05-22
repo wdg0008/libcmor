@@ -903,3 +903,9 @@ compile_commands.json
 *_qmlcache.qrc
 
 # End of https://www.toptal.com/developers/gitignore/api/c,c++,windows,macos,linux,visualstudio,visualstudiocode,codecomposerstudio,eclipse,vim,emacs,cmake,clion,xmake
+
+# Assembly files
+*.s
+
+# build directory
+build/

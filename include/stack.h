@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <string.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*! Type-generic stack using void pointers */
 typedef struct {
     void* data; //!< Pointer to the stack's data array
@@ -95,3 +99,7 @@ StackStatus stack_push(Stack *s, const void *item);
  * \copyright Copyright (c) 2026
  */
 StackStatus stack_pop(Stack *s, void *dest);
+
+#ifdef __cplusplus
+}
+#endif

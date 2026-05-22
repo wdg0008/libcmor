@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 project(cmor C)
 
+add_compile_options(-save-temps) # show expansion of preprocessor and assembly
+
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)

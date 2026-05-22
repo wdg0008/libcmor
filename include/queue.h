@@ -12,6 +12,10 @@
 #include <stdbool.h>
 #include <string.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*! Type-generic queue using pointers */
 typedef struct {
     void* data; //!< Pointer to the queue's data array
@@ -109,3 +113,7 @@ QueueStatus queue_enqueue(Queue *q, const void *item);
  * \copyright Copyright (c) 2026
  */
 QueueStatus queue_dequeue(Queue *q, void *dest);
+
+#ifdef __cplusplus
+}
+#endif
