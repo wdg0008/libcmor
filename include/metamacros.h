@@ -110,6 +110,51 @@ extern "C" {
     FPTR_MAP(FUNC, float), \
     FPTR_MAP(FUNC, double)
 
+#define STDINT_TYPE_MAP(FMACRO) \
+    FMACRO(i8, int8_t) \
+    FMACRO(i16, int16_t) \
+    FMACRO(i32, int32_t) \
+    FMACRO(i64, int64_t) \
+    FMACRO(u8, uint8_t) \
+    FMACRO(u16, uint16_t) \
+    FMACRO(u32, uint32_t) \
+    FMACRO(u64, uint64_t) \
+
+#define INTEGRAL_TYPE_MAP(FMACRO) \
+    FMACRO(c, char)\
+    FMACRO(sc, signed char)\
+    FMACRO(s, short)\
+    FMACRO(i, int)\
+    FMACRO(l, long)\
+    FMACRO(ll, long long)\
+    FMACRO(uc, unsigned char)\
+    FMACRO(us, unsigned short)\
+    FMACRO(ui, unsigned int)\
+    FMACRO(ul, unsigned long)\
+    FMACRO(ull, unsigned long long)
+
+/*! Pass this to macros to map suffixes to type names */
+ #define FLOAT_TYPE_MAP(FMACRO) \
+    FMACRO(f,  float)           \
+    FMACRO(d,  double)          \
+    FMACRO(ld, long double)
+
+#define FUND_TYPE_MAP(FMACRO)       \
+    FMACRO(c, char)                 \
+    FMACRO(sc, signed char)         \
+    FMACRO(s, short)                \
+    FMACRO(i, int)                  \
+    FMACRO(l, long)                 \
+    FMACRO(ll, long long)           \
+    FMACRO(uc, unsigned char)       \
+    FMACRO(us, unsigned short)      \
+    FMACRO(ui, unsigned int)        \
+    FMACRO(ul, unsigned long)       \
+    FMACRO(ull, unsigned long long) \
+    FMACRO(f,  float)               \
+    FMACRO(d,  double)              \
+    FMACRO(ld, long double)
+
 #ifdef __cplusplus
 }
 #endif
