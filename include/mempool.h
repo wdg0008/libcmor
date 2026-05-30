@@ -10,7 +10,7 @@
  * 
  */
 
-#include <string.h>
+#include <stddef.h>
 #include <stdbool.h>
 
 #ifdef __cplusplus
